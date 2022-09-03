@@ -17952,6 +17952,12 @@ const main = async () => {
       core.info('Create pr comment');
       pr_number = pr.number;
 
+      console.log(issue_number)
+      console.log(typeof issue_number)
+
+      console.log(pr_number)
+      console.log(typeof pr_number)
+
       await octokit.issues.createComment({
         repo,
         owner,
