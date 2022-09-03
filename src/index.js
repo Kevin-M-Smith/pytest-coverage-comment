@@ -206,7 +206,7 @@ const main = async () => {
     }
   }
 
-  if (eventName === 'pull_request') {
+  if (eventName === 'push') {
     if (createNewComment) {
       core.info('Creating a new comment');
 
