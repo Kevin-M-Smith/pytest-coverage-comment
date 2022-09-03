@@ -1,7 +1,6 @@
 name: My Pytest Coverage Comment
 on:
   push:
-  pull_request:
 jobs:
   live-test:
     name: Live Test
