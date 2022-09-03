@@ -17954,7 +17954,7 @@ const main = async () => {
     } 
     else 
     { 
-      core.info('Create pr comment')
+      core.info('Create pr comment');
       await octokit.issues.createComment({
         repo,
         owner,
