@@ -208,6 +208,7 @@ const main = async () => {
       });
     }
   }
+  
 
   if (eventName === 'pull_request') {
     if (createNewComment) {
