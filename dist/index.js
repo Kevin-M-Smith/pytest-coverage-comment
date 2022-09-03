@@ -17927,13 +17927,28 @@ const main = async () => {
   const issue_number = payload.pull_request ? payload.pull_request.number : 0;
 
   if (eventName === 'push') {
-    core.info('Create commit comment');
+
+    pulls = octokit.pull_request(repo, "open")
+
+    push_head = payload.after
+    pr = pulls.find(o => o.head.sha === push_head)
+    pr_number = pr.number
+
+    await octokit.issues.createComment({
+        repo,
+        owner,
+        pr_number,
+        body,
+    });
+
+/*    core.info('Create commit comment');
     await octokit.repos.createCommitComment({
       repo,
       owner,
       commit_sha: options.commit,
       body,
     });
+*/
   }
 
   if (eventName === 'pull_request') {
