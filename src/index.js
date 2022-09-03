@@ -160,13 +160,40 @@ const main = async () => {
   const issue_number = payload.pull_request ? payload.pull_request.number : 0;
 
   if (eventName === 'push') {
-    core.info('Create commit comment');
-    await octokit.repos.createCommitComment({
-      repo,
-      owner,
-      commit_sha: options.commit,
-      body,
-    });
+    
+    // look for existing pull request matching options.commit
+    pulls = await octokit.pulls.list({
+      owner: owner,
+      repo: repo,
+    })
+
+    pr = pulls.data.find(o => o.head.sha === options.commit)
+
+    // if no pr found, fall back to commit comment
+    if (pr === undefined)
+    {
+      core.info('Create commit comment');
+      await octokit.repos.createCommitComment({
+        repo,
+        owner,
+        commit_sha: options.commit,
+        body,
+      });
+    }
+
+    // otherwise, pr comment
+    else
+    {
+      core.info('Create pr comment');
+      pr_number = pr.number;
+
+      await octokit.issues.createComment({
+        repo,
+        owner,
+        pr_number,
+        body,
+      });
+    }
   }
 
   if (eventName === 'pull_request') {

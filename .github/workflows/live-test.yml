@@ -1,6 +1,6 @@
 name: My Pytest Coverage Comment
 on:
-  pull_request:
+  push:
 jobs:
   live-test:
     name: Live Test
@@ -10,7 +10,7 @@ jobs:
 
       - name: Pytest coverage comment
         id: coverageComment
-        uses: MishaKav/pytest-coverage-comment@main
+        uses: Kevin-M-Smith/pytest-coverage-comment@testing
         with:
           pytest-coverage-path: ./data/pytest-coverage_4.txt
           junitxml-path: ./data/pytest_1.xml
@@ -30,14 +30,3 @@ jobs:
           echo "Coverage Time - ${{ steps.coverageComment.outputs.time }}"
 
           echo "Not Success Test Info - ${{ steps.coverageComment.outputs.notSuccessTestInfo }}"
-
-      - name: Create the Badge
-        uses: schneegans/dynamic-badges-action@v1.0.0
-        with:
-          auth: ${{ secrets.PYTEST_COVERAGE_COMMENT }}
-          gistID: 5e90d640f8c212ab7bbac38f72323f80
-          filename: pytest-coverage-comment__main.json
-          label: Coverage Report
-          message: ${{ steps.coverageComment.outputs.coverage }}
-          color: ${{ steps.coverageComment.outputs.color }}
-          namedLogo: python
