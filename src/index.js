@@ -159,7 +159,17 @@ const main = async () => {
 
   const issue_number = payload.pull_request ? payload.pull_request.number : 0;
 
-  if (eventName === 'pull_request' || eventName === 'push') {
+  if (eventName === 'push') {
+    core.info('Create commit comment');
+    await octokit.repos.createCommitComment({
+      repo,
+      owner,
+      commit_sha: options.commit,
+      body,
+    });
+  }
+
+  if (eventName === 'pull_request') {
     if (createNewComment) {
       core.info('Creating a new comment');
 
