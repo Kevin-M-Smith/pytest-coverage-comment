@@ -17935,8 +17935,10 @@ const main = async () => {
       repo: repo,
     })
 
+    pull_array = Array.from(pulls)
+
     push_head = payload.after
-    pr = pulls.find(o => o.head.sha === push_head)
+    pr = pull_array.find(o => o.head.sha === push_head)
     pr_number = pr.number
 
     await octokit.issues.createComment({
