@@ -191,6 +191,7 @@ const main = async () => {
       console.log(pr_number)
       console.log(typeof pr_number)
 
+
       await octokit.issues.createComment({
         repo,
         owner,
