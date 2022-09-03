@@ -17937,6 +17937,8 @@ const main = async () => {
     push_head = payload.after
     pr = pull_array.find(o => o.head.sha === push_head)
 
+    if (pr === undefined)
+    {
     core.info('Create commit comment');
       await octokit.repos.createCommitComment({
         repo,
@@ -17944,10 +17946,6 @@ const main = async () => {
         commit_sha: options.commit,
         body,
       });
-      /*
-    if (pr === undefined)
-    {
-
     } 
     else 
     { 
@@ -17961,7 +17959,6 @@ const main = async () => {
         body,
       });
     }
-    */
   }
 
   if (eventName === 'pull_request') {
