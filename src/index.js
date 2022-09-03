@@ -159,7 +159,8 @@ const main = async () => {
 
   const issue_number = payload.pull_request ? payload.pull_request.number : 0;
 
-  if (eventName === 'push') {
+
+  if (eventName === 'pushes') {
     
     pulls = await octokit.pulls.list({
       owner: owner,
