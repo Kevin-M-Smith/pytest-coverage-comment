@@ -17927,17 +17927,16 @@ const main = async () => {
   const issue_number = payload.pull_request ? payload.pull_request.number : 0;
 
   if (eventName === 'push') {
+    
+    // look for existing pull request matching options.commit
     pulls = await octokit.pulls.list({
       owner: owner,
       repo: repo,
     })
 
-    pull_array = Array.from(pulls.data)
-    pr = pull_array.find(o => o.head.sha === options.commit)
+    pr = pulls.data.find(o => o.head.sha === options.commit)
 
-    console.log(options.commit)
-    console.log(pull_array)
-
+    // if no pr found, fall back to commit comment
     if (pr === undefined)
     {
       core.info('Create commit comment');
@@ -17948,17 +17947,12 @@ const main = async () => {
         body,
       });
     }
+
+    // otherwise, pr comment
     else
     {
       core.info('Create pr comment');
       pr_number = pr.number;
-
-      console.log(issue_number)
-      console.log(typeof issue_number)
-
-      console.log(pr_number)
-      console.log(typeof pr_number)
-
 
       await octokit.issues.createComment({
         repo,
