@@ -17958,7 +17958,7 @@ const main = async () => {
       await octokit.issues.createComment({
         repo,
         owner,
-        pr.number,
+        pr["number"],
         body,
       });
     }
