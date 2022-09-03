@@ -161,6 +161,8 @@ const main = async () => {
 
   if (eventName === 'push') {
     
+    print(repo)
+
     pulls = await octokit.pulls.list({
       owner: owner,
       repo: repo,
@@ -173,6 +175,7 @@ const main = async () => {
 
     console.log(push_head)
     console.log(pull_array)
+
 
 
     if (pr === undefined)
