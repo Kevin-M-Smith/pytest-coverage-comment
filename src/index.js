@@ -160,13 +160,38 @@ const main = async () => {
   const issue_number = payload.pull_request ? payload.pull_request.number : 0;
 
   if (eventName === 'push') {
-    core.info('Create commit comment');
-    await octokit.repos.createCommitComment({
-      repo,
-      owner,
-      commit_sha: options.commit,
-      body,
-    });
+    pulls = await octokit.pulls.list({
+      owner: owner,
+      repo: repo,
+    })
+
+    pull_array = Array.from(pulls.data)
+
+    push_head = payload.after
+    pr = pull_array.find(o => o.head.sha === push_head)
+
+    if (pr === undefined || pr === 12)
+    {
+      core.info('Create commit comment');
+      await octokit.repos.createCommitComment({
+        repo,
+        owner,
+        commit_sha: options.commit,
+        body,
+      });
+    } 
+    else 
+    { 
+      core.info('Create pr comment');
+      pr_number = pr.number;
+
+      await octokit.issues.createComment({
+        repo,
+        owner,
+        pr_number,
+        body,
+      });
+    }
   }
 
   if (eventName === 'pull_request') {

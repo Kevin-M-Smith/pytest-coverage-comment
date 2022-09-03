@@ -17927,9 +17927,6 @@ const main = async () => {
   const issue_number = payload.pull_request ? payload.pull_request.number : 0;
 
   if (eventName === 'push') {
-
-    //pulls = octokit.rest.pulls(repo, "open")
-
     pulls = await octokit.pulls.list({
       owner: owner,
       repo: repo,
@@ -17955,10 +17952,12 @@ const main = async () => {
     else 
     { 
       core.info('Create pr comment');
+      pr_number = pr.number;
+      console.log(pr_number)
       await octokit.issues.createComment({
         repo,
         owner,
-        pr["number"],
+        pr_number,
         body,
       });
     }
