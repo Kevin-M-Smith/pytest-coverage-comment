@@ -17935,7 +17935,7 @@ const main = async () => {
     pull_array = Array.from(pulls.data)
     pr = pull_array.find(o => o.head.sha === options.commit)
 
-    console.log(push_head)
+    console.log(options.commit)
     console.log(pull_array)
 
     if (pr === undefined)
