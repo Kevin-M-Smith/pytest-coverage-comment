@@ -174,6 +174,7 @@ const main = async () => {
     console.log(push_head)
     console.log(pull_array)
 
+
     if (pr === undefined)
     {
       core.info('Create commit comment');
