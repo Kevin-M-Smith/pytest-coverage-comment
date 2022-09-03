@@ -17930,7 +17930,7 @@ const main = async () => {
 
     //pulls = octokit.rest.pulls(repo, "open")
 
-    pulls = octokit.pulls.list({
+    pulls = await octokit.pulls.list({
       owner: owner,
       repo: repo,
     })
