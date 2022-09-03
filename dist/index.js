@@ -17931,7 +17931,8 @@ const main = async () => {
       owner: owner,
       repo: repo,
     })
-    
+
+    pull_array = Array.from(pulls.data)
     pr = pull_array.find(o => o.head.sha === options.commit)
 
     console.log(push_head)
