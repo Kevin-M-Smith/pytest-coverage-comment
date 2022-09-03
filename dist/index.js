@@ -17935,9 +17935,9 @@ const main = async () => {
       repo: repo,
     })
 
-    console.log(pulls)
+    console.log(pulls.data)
 
-    pull_array = Array.from(pulls)
+    pull_array = Array.from(pulls.data)
 
     push_head = payload.after
     pr = pull_array.find(o => o.head.sha === push_head)
