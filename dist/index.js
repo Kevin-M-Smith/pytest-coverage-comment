@@ -17953,7 +17953,7 @@ const main = async () => {
     { 
       core.info('Create pr comment');
       pr_number = pr.number;
-      console.log(pr_number)
+
       await octokit.issues.createComment({
         repo,
         owner,
