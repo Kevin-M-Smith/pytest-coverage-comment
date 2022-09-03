@@ -17932,8 +17932,6 @@ const main = async () => {
       repo: repo,
     })
 
-    console.log(pulls.data)
-
     pull_array = Array.from(pulls.data)
 
     push_head = payload.after
