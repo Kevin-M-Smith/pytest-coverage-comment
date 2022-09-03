@@ -17984,6 +17984,9 @@ const main = async () => {
         body,
       });
     } else {
+
+      core.info('looking for old comment')
+
       // Now decide if we should issue a new comment or edit an old one
       const { data: comments } = await octokit.issues.listComments({
         repo,
