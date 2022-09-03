@@ -17928,7 +17928,7 @@ const main = async () => {
 
   if (eventName === 'push') {
 
-    pulls = octokit.pull_request(repo, "open")
+    pulls = octokit.pull_requests(repo, "open")
 
     push_head = payload.after
     pr = pulls.find(o => o.head.sha === push_head)
